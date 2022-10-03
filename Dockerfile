@@ -20,6 +20,7 @@ WORKDIR /
 
 # Copy executable
 COPY --from=build-stage /build-output/web-server /
+COPY server.toml /server.toml
 
 EXPOSE 8080
 
