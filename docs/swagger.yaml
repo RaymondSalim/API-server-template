@@ -1,0 +1,127 @@
+basePath: /
+definitions:
+  models.Foo:
+    properties:
+      fooName:
+        type: string
+      id:
+        type: integer
+    type: object
+  request.AddFoo:
+    properties:
+      name:
+        type: string
+    type: object
+  request.DeleteFoo:
+    properties:
+      id:
+        type: integer
+    type: object
+  request.GetFoo:
+    properties:
+      id:
+        type: integer
+    type: object
+  response.FooResponse:
+    properties:
+      foo:
+        $ref: '#/definitions/models.Foo'
+      status:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: raymond+novometrix@raymonds.dev
+    name: Raymond Salim
+    url: https://raymonds.dev/#contact
+  description: This is a template for Novometrix's web server
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Web Server Template
+  version: 0.0.1
+paths:
+  /foo/create:
+    post:
+      consumes:
+      - application/json
+      description: Adds a new foo to the database
+      parameters:
+      - description: Request Body
+        in: body
+        name: FooRequest
+        required: true
+        schema:
+          $ref: '#/definitions/request.AddFoo'
+      - default: 174b9d6a-dafe-4f68-8e4b-6dcfbe7a804e
+        description: Request ID
+        in: header
+        name: X-Request-ID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.FooResponse'
+      summary: Adds a new foo
+      tags:
+      - Foo
+  /foo/delete:
+    post:
+      consumes:
+      - application/json
+      description: Delete foo from the database
+      parameters:
+      - description: Request Body
+        in: body
+        name: FooRequest
+        required: true
+        schema:
+          $ref: '#/definitions/request.DeleteFoo'
+      - description: 865782e5-ccbf-4c5f-b967-f3df1fcd1f75
+        in: header
+        name: X-Request-ID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.FooResponse'
+      summary: Delete foo
+      tags:
+      - Foo
+  /foo/get:
+    post:
+      consumes:
+      - application/json
+      description: Get foo from the database
+      parameters:
+      - description: Request Body
+        in: body
+        name: FooRequest
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetFoo'
+      - description: 865782e5-ccbf-4c5f-b967-f3df1fcd1f75
+        in: header
+        name: X-Request-ID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.FooResponse'
+      summary: Get foo
+      tags:
+      - Foo
+swagger: "2.0"
