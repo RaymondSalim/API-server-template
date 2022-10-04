@@ -120,4 +120,5 @@ fabric.properties
 /build-output/
 
 # Config files
-/**/*/*.toml
+/*.toml
+!/template.toml
