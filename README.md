@@ -13,6 +13,7 @@ This template is inspired by https://ldej.nl/post/enterprise-go-architecture/
 |       Logging        |     [logrus](https://github.com/sirupsen/logrus)     |  1.9.0  |   MIT   |
 |         ORM          |       [GORM](https://github.com/go-gorm/gorm)        | 1.23.10 |   MIT   |
 |  API Documentation   |        [Swag](https://github.com/swaggo/swag)        |  1.8.6  |   MIT   |
+|    Message Queue     |      [Go NSQ](https://github.com/nsqio/go-nsq/)      |  1.1.0  |   MIT   |
 
 ## Folder Structure
 ```markdown

@@ -24,6 +24,52 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/counter/add": {
+            "post": {
+                "description": "Add Counter",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "tags": [
+                    "Counter"
+                ],
+                "summary": "Add counter",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.FooResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/counter/get": {
+            "get": {
+                "description": "Get Last Counter",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "tags": [
+                    "Counter"
+                ],
+                "summary": "Get Last counter",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.FooResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/foo/create": {
             "post": {
                 "description": "Adds a new foo to the database",

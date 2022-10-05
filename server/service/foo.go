@@ -6,6 +6,7 @@ import (
 	"github.com/Novometrix/web-server-template/server/models/response"
 	"github.com/Novometrix/web-server-template/server/repository"
 	"github.com/gin-gonic/gin"
+	"github.com/nsqio/go-nsq"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -17,13 +18,13 @@ type FooService interface {
 
 type fooService struct {
 	fooRepository repository.FooRepository
-	// add other dependencies
+	producer      *nsq.Producer
 }
 
-func NewFooService(fooRepo repository.FooRepository) FooService {
+func NewFooService(fooRepo repository.FooRepository, nsqProducer *nsq.Producer) FooService {
 	return fooService{
 		fooRepository: fooRepo,
-		// other dependencies
+		producer:      nsqProducer,
 	}
 }
 

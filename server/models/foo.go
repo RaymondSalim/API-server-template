@@ -9,7 +9,7 @@ package models
 	Whenever the HTTP endpoints response is different from the model, a response type is made in the response package, and the mapping is done in the service.
 */
 
-const tableName = "foo-table"
+const fooTableName = "foo-table"
 
 type Foo struct {
 	ID      uint   `gorm:"primaryKey"`
@@ -17,5 +17,5 @@ type Foo struct {
 }
 
 func (Foo) TableName() string {
-	return tableName
+	return fooTableName
 }

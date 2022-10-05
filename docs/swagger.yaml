@@ -42,6 +42,36 @@ info:
   title: Web Server Template
   version: 0.0.1
 paths:
+  /counter/add:
+    post:
+      consumes:
+      - application/json
+      description: Add Counter
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.FooResponse'
+      summary: Add counter
+      tags:
+      - Counter
+  /counter/get:
+    get:
+      consumes:
+      - application/json
+      description: Get Last Counter
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.FooResponse'
+      summary: Get Last counter
+      tags:
+      - Counter
   /foo/create:
     post:
       consumes:

@@ -21,7 +21,7 @@ import (
 	fooRouter.GET("/get-foo-path", fooController.GetFoo)
 */
 
-func Init(engine *gin.Engine, controllers *controller.Controllers, cfg config.AppConfig) {
+func Init(engine *gin.Engine, controllers *controller.Controllers, cfg *config.AppConfig) {
 	engine.RedirectTrailingSlash = false
 
 	// Foo Endpoints
@@ -30,6 +30,13 @@ func Init(engine *gin.Engine, controllers *controller.Controllers, cfg config.Ap
 		foo.POST("/create", controllers.FooController.AddFoo)
 		foo.POST("/get", controllers.FooController.GetFoo)
 		foo.POST("/delete", controllers.FooController.AddFoo)
+	}
+
+	// Counter Endpoints
+	counter := engine.Group("/counter")
+	{
+		counter.GET("/get", controllers.CounterController.GetLastCounter)
+		counter.POST("/add", controllers.CounterController.AddCounter)
 	}
 
 	// Health endpoint

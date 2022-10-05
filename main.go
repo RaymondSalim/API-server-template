@@ -1,16 +1,25 @@
 package main
 
 import (
+	"context"
+	"errors"
+	"fmt"
 	util "github.com/Novometrix/util/middleware"
 	"github.com/Novometrix/web-server-template/config"
+	"github.com/Novometrix/web-server-template/server/consumers"
 	"github.com/Novometrix/web-server-template/server/controller"
 	"github.com/Novometrix/web-server-template/server/db"
+	"github.com/Novometrix/web-server-template/server/producers"
 	"github.com/Novometrix/web-server-template/server/repository"
 	"github.com/Novometrix/web-server-template/server/router"
 	"github.com/Novometrix/web-server-template/server/service"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
+	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 )
 
 // @title       Web Server Template
@@ -29,6 +38,7 @@ import (
 
 func main() {
 	cfg := config.GetAppConfig()
+	fmt.Printf("%+v", cfg)
 	log.SetFormatter(&log.JSONFormatter{})
 	log.SetOutput(os.Stdout)
 
@@ -37,15 +47,49 @@ func main() {
 		log.Panic("failed to initialize database with error: ", err)
 	}
 
+	prd := producers.InitProducers(&cfg)
 	repositories := repository.InitRepository(database)
-	services := service.InitService(repositories)
+	services := service.InitService(repositories, prd)
 	controllers := controller.InitController(services)
+	csm := consumers.InitConsumers(&cfg, services)
 
 	ginRouter := gin.New()
 
 	ginRouter.Use(util.ResponseWrapperMiddleware)
-	router.Init(ginRouter, controllers, cfg)
+	router.Init(ginRouter, controllers, &cfg)
 
-	log.Info("Starting Server on port " + cfg.Server.Port)
-	ginRouter.Run(":" + cfg.Server.Port)
+	srv := &http.Server{
+		Addr:    ":" + cfg.Server.Port,
+		Handler: ginRouter,
+	}
+
+	// Shutdown Publishers and Consumers
+	srv.RegisterOnShutdown(func() {
+		prd.Stop()
+		for _, c := range csm {
+			c.Stop()
+			<-c.StopChan
+		}
+	})
+
+	go func() {
+		log.Info("Starting Server on port " + cfg.Server.Port)
+		if err := srv.ListenAndServe(); err != nil && errors.Is(err, http.ErrServerClosed) {
+			log.Errorf("listen: %s\n", err)
+		}
+	}()
+
+	quit := make(chan os.Signal)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+	log.Infof("shutting down server...")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatal("server forced to shutdown")
+	}
+
+	log.Print("server exiting")
 }
