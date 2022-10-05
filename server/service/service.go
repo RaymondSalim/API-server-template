@@ -1,6 +1,9 @@
 package service
 
-import "github.com/Novometrix/web-server-template/server/repository"
+import (
+	"github.com/Novometrix/web-server-template/server/repository"
+	"github.com/nsqio/go-nsq"
+)
 
 /*
 	The service contains the business logic.
@@ -11,10 +14,12 @@ import "github.com/Novometrix/web-server-template/server/repository"
 
 type Services struct {
 	FooService
+	CounterService
 }
 
-func InitService(r *repository.Repositories) *Services {
+func InitService(r *repository.Repositories, nsqProducer *nsq.Producer) *Services {
 	return &Services{
-		FooService: NewFooService(r.FooRepository),
+		FooService:     NewFooService(r.FooRepository, nsqProducer),
+		CounterService: NewCounterService(r.CounterRepository, nsqProducer),
 	}
 }
