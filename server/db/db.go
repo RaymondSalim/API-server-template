@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 	"github.com/Novometrix/web-server-template/config"
+	"github.com/Novometrix/web-server-template/server/models"
 	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
@@ -24,7 +25,8 @@ func Init(cfg *config.AppConfig) (db *gorm.DB, err error) {
 		dsn := constructDataSourceName(cfg)
 		db, err = gorm.Open(postgres.Open(dsn), gormConfig)
 	} else if strings.ToLower(cfg.Database.Type) == "sqlite" {
-		db, err = gorm.Open(sqlite.Open("sqlite.db"), gormConfig)
+		db, err = gorm.Open(sqlite.Open("file::memory:?cache=shared"), gormConfig)
+		_ = db.AutoMigrate(&models.Counter{}, &models.Foo{})
 	} else {
 		log.Panic("wrong value of database.type specified in configuration file")
 	}
