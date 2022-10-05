@@ -1,4 +1,4 @@
-module github.com/Novometrix/web-server-template
+module github.com/RaymondSalim/API-server-template
 
 go 1.18
 

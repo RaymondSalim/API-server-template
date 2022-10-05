@@ -1,4 +1,4 @@
-# Novometrix's Web Server Template
+# API Server Template
 <hr>
 
 This template is inspired by https://ldej.nl/post/enterprise-go-architecture/

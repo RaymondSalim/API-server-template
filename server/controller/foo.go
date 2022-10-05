@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"github.com/Novometrix/web-server-template/server/models/request"
-	"github.com/Novometrix/web-server-template/server/service"
+	"github.com/RaymondSalim/API-server-template/server/models/request"
+	"github.com/RaymondSalim/API-server-template/server/service"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

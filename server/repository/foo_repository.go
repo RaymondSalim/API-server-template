@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/Novometrix/web-server-template/server/models"
+	"github.com/RaymondSalim/API-server-template/server/models"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	"gorm.io/gorm"

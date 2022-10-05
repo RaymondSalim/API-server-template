@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/Novometrix/web-server-template/server/models"
-	"github.com/Novometrix/web-server-template/server/models/request"
-	"github.com/Novometrix/web-server-template/server/models/response"
-	"github.com/Novometrix/web-server-template/server/repository"
+	"github.com/RaymondSalim/API-server-template/server/models"
+	"github.com/RaymondSalim/API-server-template/server/models/request"
+	"github.com/RaymondSalim/API-server-template/server/models/response"
+	"github.com/RaymondSalim/API-server-template/server/repository"
 	"github.com/gin-gonic/gin"
 	"github.com/nsqio/go-nsq"
 	log "github.com/sirupsen/logrus"

@@ -1,6 +1,6 @@
 package response
 
-import "github.com/Novometrix/web-server-template/server/models"
+import "github.com/RaymondSalim/API-server-template/server/models"
 
 type FooResponse struct {
 	Status string     `json:"status"`

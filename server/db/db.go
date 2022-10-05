@@ -2,8 +2,8 @@ package db
 
 import (
 	"fmt"
-	"github.com/Novometrix/web-server-template/config"
-	"github.com/Novometrix/web-server-template/server/models"
+	"github.com/RaymondSalim/API-server-template/config"
+	"github.com/RaymondSalim/API-server-template/server/models"
 	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"

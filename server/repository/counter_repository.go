@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/Novometrix/web-server-template/server/models"
+	"github.com/RaymondSalim/API-server-template/server/models"
 	"gorm.io/gorm"
 )
 
