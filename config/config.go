@@ -33,6 +33,11 @@ type AppConfig struct {
 		Password *string
 		Timezone string
 	}
+
+	NSQ struct {
+		NSQDUrl       string `mapstructure:"DAEMON_URL"`
+		NSQLookupdURL string `mapstructure:"LOOKUP_DAEMON_URL"`
+	}
 }
 
 func GetAppConfig() AppConfig {

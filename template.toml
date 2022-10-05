@@ -13,3 +13,7 @@ SCHEMA=""
 USERNAME=""
 PASSWORD=""
 TIMEZONE=""
+
+[nsq]
+DAEMON_URL="localhost:4150"
+LOOKUP_DAEMON_URL="localhost:4161"
