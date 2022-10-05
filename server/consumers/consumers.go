@@ -2,9 +2,9 @@ package consumers
 
 import (
 	"fmt"
-	"github.com/Novometrix/web-server-template/config"
-	constants "github.com/Novometrix/web-server-template/server/constants/nsq"
-	"github.com/Novometrix/web-server-template/server/service"
+	"github.com/RaymondSalim/API-server-template/config"
+	constants "github.com/RaymondSalim/API-server-template/server/constants/nsq"
+	"github.com/RaymondSalim/API-server-template/server/service"
 	"github.com/nsqio/go-nsq"
 	log "github.com/sirupsen/logrus"
 )

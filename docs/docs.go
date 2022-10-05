@@ -13,7 +13,7 @@ const docTemplate = `{
         "contact": {
             "name": "Raymond Salim",
             "url": "https://raymonds.dev/#contact",
-            "email": "raymond+novometrix@raymonds.dev"
+            "email": "raymond@raymonds.dev"
         },
         "license": {
             "name": "Apache 2.0",
@@ -252,7 +252,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Web Server Template",
-	Description:      "This is a template for Novometrix's web server",
+	Description:      "This is a template API server",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

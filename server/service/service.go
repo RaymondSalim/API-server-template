@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/Novometrix/web-server-template/server/repository"
+	"github.com/RaymondSalim/API-server-template/server/repository"
 	"github.com/nsqio/go-nsq"
 )
 

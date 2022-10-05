@@ -3,7 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"errors"
-	"github.com/Novometrix/web-server-template/server/service"
+	"github.com/RaymondSalim/API-server-template/server/service"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	"gorm.io/gorm"

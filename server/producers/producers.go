@@ -1,7 +1,7 @@
 package producers
 
 import (
-	"github.com/Novometrix/web-server-template/config"
+	"github.com/RaymondSalim/API-server-template/config"
 	"github.com/nsqio/go-nsq"
 	log "github.com/sirupsen/logrus"
 )

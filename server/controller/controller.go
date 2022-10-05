@@ -1,6 +1,6 @@
 package controller
 
-import "github.com/Novometrix/web-server-template/server/service"
+import "github.com/RaymondSalim/API-server-template/server/service"
 
 type Controllers struct {
 	FooController

@@ -1,8 +1,8 @@
 package router
 
 import (
-	"github.com/Novometrix/web-server-template/config"
-	"github.com/Novometrix/web-server-template/server/controller"
+	"github.com/RaymondSalim/API-server-template/config"
+	"github.com/RaymondSalim/API-server-template/server/controller"
 	"github.com/gin-gonic/gin"
 )
 

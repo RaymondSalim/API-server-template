@@ -2,9 +2,9 @@ package service
 
 import (
 	"encoding/json"
-	constants "github.com/Novometrix/web-server-template/server/constants/nsq"
-	"github.com/Novometrix/web-server-template/server/models"
-	"github.com/Novometrix/web-server-template/server/repository"
+	constants "github.com/RaymondSalim/API-server-template/server/constants/nsq"
+	"github.com/RaymondSalim/API-server-template/server/models"
+	"github.com/RaymondSalim/API-server-template/server/repository"
 	"github.com/gin-gonic/gin"
 	"github.com/nsqio/go-nsq"
 	log "github.com/sirupsen/logrus"

@@ -5,14 +5,14 @@ import (
 	"errors"
 	"fmt"
 	util "github.com/Novometrix/util/middleware"
-	"github.com/Novometrix/web-server-template/config"
-	"github.com/Novometrix/web-server-template/server/consumers"
-	"github.com/Novometrix/web-server-template/server/controller"
-	"github.com/Novometrix/web-server-template/server/db"
-	"github.com/Novometrix/web-server-template/server/producers"
-	"github.com/Novometrix/web-server-template/server/repository"
-	"github.com/Novometrix/web-server-template/server/router"
-	"github.com/Novometrix/web-server-template/server/service"
+	"github.com/RaymondSalim/API-server-template/config"
+	"github.com/RaymondSalim/API-server-template/server/consumers"
+	"github.com/RaymondSalim/API-server-template/server/controller"
+	"github.com/RaymondSalim/API-server-template/server/db"
+	"github.com/RaymondSalim/API-server-template/server/producers"
+	"github.com/RaymondSalim/API-server-template/server/repository"
+	"github.com/RaymondSalim/API-server-template/server/router"
+	"github.com/RaymondSalim/API-server-template/server/service"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	"net/http"
@@ -24,11 +24,11 @@ import (
 
 // @title       Web Server Template
 // @version     0.0.1
-// @description This is a template for Novometrix's web server
+// @description This is a template API server
 
 // @contact.name  Raymond Salim
 // @contact.url   https://raymonds.dev/#contact
-// @contact.email raymond+novometrix@raymonds.dev
+// @contact.email raymond@raymonds.dev
 
 // @license.name Apache 2.0
 // @license.url  http://www.apache.org/licenses/LICENSE-2.0.html

@@ -32,10 +32,10 @@ definitions:
 host: localhost:8080
 info:
   contact:
-    email: raymond+novometrix@raymonds.dev
+    email: raymond@raymonds.dev
     name: Raymond Salim
     url: https://raymonds.dev/#contact
-  description: This is a template for Novometrix's web server
+  description: This is a template API server
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
