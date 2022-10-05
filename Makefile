@@ -14,7 +14,6 @@ build:
 
 build-docker:
 	docker build -t "$(SERVICE_NAME):$(VERSION)" -f ./Dockerfile .
- module name, and add new dependencies
 build-docker-debug:
 	docker build -t "$(SERVICE_NAME):$(VERSION)-debug" -f ./Dockerfile.debug .
 
