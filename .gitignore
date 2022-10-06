@@ -121,4 +121,4 @@ fabric.properties
 
 # Config files
 /*.toml
-!/template.toml
+!/config/template.toml
