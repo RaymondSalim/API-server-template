@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"errors"
-	"fmt"
 	util "github.com/Novometrix/util/middleware"
 	"github.com/RaymondSalim/API-server-template/config"
+	"github.com/RaymondSalim/API-server-template/server/constants"
 	"github.com/RaymondSalim/API-server-template/server/consumers"
 	"github.com/RaymondSalim/API-server-template/server/controller"
 	"github.com/RaymondSalim/API-server-template/server/db"
@@ -37,25 +37,39 @@ import (
 // @BasePath /
 
 func main() {
-	cfg := config.GetAppConfig()
-	fmt.Printf("%+v", cfg)
-	log.SetFormatter(&log.JSONFormatter{})
+	//log.SetFormatter(&log.JSONFormatter{})
 	log.SetOutput(os.Stdout)
 
+	cfg := config.GetAppConfig()
+
+	if cfg.Environment != constants.EnvironmentProduction {
+		log.SetLevel(log.DebugLevel)
+	}
+
+	log.Debugf("using config file: %s", cfg.ConfigFileName)
+
+	log.Debug("initializing database")
 	database, err := db.Init(&cfg)
 	if err != nil {
 		log.Panic("failed to initialize database with error: ", err)
 	}
 
+	log.Debug("initializing producers")
 	prd := producers.InitProducers(&cfg)
+	log.Debug("initializing repositories")
 	repositories := repository.InitRepository(database)
+	log.Debug("initializing services")
 	services := service.InitService(repositories, prd)
+	log.Debug("initializing controllers")
 	controllers := controller.InitController(services)
+	log.Debug("initializing consumeres")
 	csm := consumers.InitConsumers(&cfg, services)
 
 	ginRouter := gin.New()
 
 	ginRouter.Use(util.ResponseWrapperMiddleware)
+
+	log.Debug("registering routes")
 	router.Init(ginRouter, controllers, &cfg)
 
 	srv := &http.Server{

@@ -20,7 +20,7 @@ func Init(cfg *config.AppConfig) (db *gorm.DB, err error) {
 		SkipDefaultTransaction: true,
 	}
 
-	log.Infof("connecting to db with type: %s", cfg.Database.Type)
+	log.Debugf("connecting to db of type: %s", cfg.Database.Type)
 	if strings.ToLower(cfg.Database.Type) == "postgresql" {
 		dsn := constructDataSourceName(cfg)
 		db, err = gorm.Open(postgres.Open(dsn), gormConfig)
