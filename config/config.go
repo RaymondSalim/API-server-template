@@ -1,6 +1,7 @@
 package config
 
 import (
+	"flag"
 	"fmt"
 	"github.com/spf13/viper"
 	"strings"
@@ -40,12 +41,18 @@ type AppConfig struct {
 	}
 }
 
+type LaunchOptions struct {
+	Config string
+}
+
 func GetAppConfig() AppConfig {
 	var c AppConfig
 
+	launchOpt := GetLaunchOptions()
+
 	v := viper.New()
-	v.SetConfigName("server")
 	v.SetConfigType(configType)
+	v.SetConfigName(launchOpt.Config)
 	v.AddConfigPath(".")
 
 	v.SetDefault("GOENV", Development)
@@ -62,4 +69,21 @@ func GetAppConfig() AppConfig {
 	}
 
 	return c
+}
+
+func GetLaunchOptions() *LaunchOptions {
+	const (
+		defaultConfig = "server"
+		configUsage   = "override default config toml file (server.toml) without extension"
+	)
+	var configName string
+
+	flag.StringVar(&configName, "configname", defaultConfig, configUsage)
+	flag.StringVar(&configName, "c", defaultConfig, configUsage)
+
+	flag.Parse()
+
+	return &LaunchOptions{
+		Config: configName,
+	}
 }
