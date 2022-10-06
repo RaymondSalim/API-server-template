@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/RaymondSalim/API-server-template/config"
+	"github.com/RaymondSalim/API-server-template/server/constants"
 	"github.com/RaymondSalim/API-server-template/server/controller"
 	"github.com/gin-gonic/gin"
 )
@@ -42,7 +43,7 @@ func Init(engine *gin.Engine, controllers *controller.Controllers, cfg *config.A
 	// Health endpoint
 	engine.GET("/health", controllers.HealthController.Status)
 
-	if cfg.Environment != config.Production {
+	if cfg.Environment != constants.EnvironmentProduction {
 		InitSwaggerRoutes(engine)
 	}
 }

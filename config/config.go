@@ -3,21 +3,15 @@ package config
 import (
 	"flag"
 	"fmt"
+	"github.com/RaymondSalim/API-server-template/server/constants"
 	"github.com/spf13/viper"
 	"strings"
 )
 
-const (
-	Development = "development"
-	Staging     = "staging"
-	Production  = "production"
-)
-
-const configType = "toml"
-
 type AppConfig struct {
-	Environment string
-	Server      struct {
+	ConfigFileName string
+	Environment    string
+	Server         struct {
 		ServiceName string
 		Port        string
 		Version     string
@@ -51,12 +45,13 @@ func GetAppConfig() AppConfig {
 	launchOpt := GetLaunchOptions()
 
 	v := viper.New()
-	v.SetConfigType(configType)
+	v.SetConfigType(constants.ConfigType)
 	v.SetConfigName(launchOpt.Config)
 	v.AddConfigPath(".")
 
-	v.SetDefault("GOENV", Development)
+	v.SetDefault("GOENV", constants.EnvironmentDevelopment)
 	c.Environment = strings.ToLower(v.GetString("GOENV"))
+	c.ConfigFileName = launchOpt.Config + "." + constants.ConfigType
 
 	err := v.ReadInConfig()
 	if err != nil {
