@@ -11,17 +11,16 @@ RUN go mod download
 RUN GOARCH=amd64 GOOS=linux go build -o /build-output/web-server main.go
 
 #### Building small image
-#FROM alpine:3.16.2
-FROM ubuntu:kinetic
+FROM ubuntu:kinetic as image
 ENV GOENV="production"
 
-WORKDIR /
+WORKDIR /app
 
 # Copy executable
-COPY --from=build-stage /build-output/web-server /
-COPY server.toml /server.toml
+COPY --from=build-stage /build-output/web-server ./
+COPY ./config/server.toml ./config/
 
 EXPOSE 8080
 
-ENTRYPOINT ["/web-server"]
+ENTRYPOINT ["/app/web-server"]
 

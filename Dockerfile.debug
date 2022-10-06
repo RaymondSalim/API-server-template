@@ -14,16 +14,15 @@ RUN go mod download
 RUN GOARCH=amd64 GOOS=linux go build -gcflags="all=-N -l" -o /build-output/web-server main.go
 
 #### Building small image
-FROM ubuntu:kinetic
+FROM ubuntu:kinetic as image
 ENV GOENV="development"
 
-WORKDIR /
+WORKDIR /app
 
 # Copy executable
-COPY --from=build-stage /go/bin/dlv /
-COPY --from=build-stage /build-output/web-server /
-COPY sqlite.db /
-COPY server.toml /
+COPY --from=build-stage /go/bin/dlv ./
+COPY --from=build-stage /build-output/web-server ./
+COPY ./config/server.toml ./config/
 
 EXPOSE 8080 40000
 
