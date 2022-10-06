@@ -36,14 +36,31 @@ func Init(cfg *config.AppConfig) (db *gorm.DB, err error) {
 
 func constructDataSourceName(cfg *config.AppConfig) string {
 	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf("host=%s ", cfg.Database.Host))
-	sb.WriteString(fmt.Sprintf("port=%s ", cfg.Database.Port))
-	sb.WriteString(fmt.Sprintf("user=%s ", *cfg.Database.Username))
-	sb.WriteString(fmt.Sprintf("password=%s ", *cfg.Database.Password))
-	sb.WriteString(fmt.Sprintf("dbname=%s ", cfg.Database.Database))
-	sb.WriteString(fmt.Sprintf("host=%s ", cfg.Database.Host))
-	sb.WriteString(fmt.Sprintf("sslmode=%s ", cfg.Database.SSLMode))
-	sb.WriteString(fmt.Sprintf("TimeZone=%s ", cfg.Database.Timezone))
+
+	if cfg.Database.Host != "" {
+		sb.WriteString(fmt.Sprintf("host=%s ", cfg.Database.Host))
+	}
+	if cfg.Database.Port != "" {
+		sb.WriteString(fmt.Sprintf("port=%s ", cfg.Database.Port))
+	}
+	if cfg.Database.Username != nil && *cfg.Database.Username != "" {
+		sb.WriteString(fmt.Sprintf("user=%s ", *cfg.Database.Username))
+	}
+	if cfg.Database.Password != nil && *cfg.Database.Password != "" {
+		sb.WriteString(fmt.Sprintf("password=%s ", *cfg.Database.Password))
+	}
+	if cfg.Database.Database != "" {
+		sb.WriteString(fmt.Sprintf("dbname=%s ", cfg.Database.Database))
+	}
+	if cfg.Database.Host != "" {
+		sb.WriteString(fmt.Sprintf("host=%s ", cfg.Database.Host))
+	}
+	if cfg.Database.SSLMode != "" {
+		sb.WriteString(fmt.Sprintf("sslmode=%s ", cfg.Database.SSLMode))
+	}
+	if cfg.Database.Timezone != "" {
+		sb.WriteString(fmt.Sprintf("TimeZone=%s ", cfg.Database.Timezone))
+	}
 
 	return sb.String()
 }
