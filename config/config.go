@@ -47,7 +47,7 @@ func GetAppConfig() AppConfig {
 	v := viper.New()
 	v.SetConfigType(constants.ConfigType)
 	v.SetConfigName(launchOpt.Config)
-	v.AddConfigPath(".")
+	v.AddConfigPath("./config")
 
 	v.SetDefault("GOENV", constants.EnvironmentDevelopment)
 	c.Environment = strings.ToLower(v.GetString("GOENV"))
