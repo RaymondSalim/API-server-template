@@ -1,0 +1,19 @@
+[server]
+SERVICE_NAME = "service"
+VERSION = "0.0.1"
+PORT = 8080
+
+[database]
+TYPE="POSTGRESQL"
+HOST="db"
+PORT="5432"
+SSLMODE="disable"
+DATABASE="novometrix"
+SCHEMA="service"
+USERNAME="postgres"
+PASSWORD="postgres"
+TIMEZONE="Asia/Jakarta"
+
+[nsq]
+DAEMON_URL="nsqd:4150"
+LOOKUP_DAEMON_URL="nsqlookupd:4161"
