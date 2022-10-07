@@ -38,6 +38,7 @@ func Init(engine *gin.Engine, controllers *controller.Controllers, cfg *config.A
 	{
 		counter.GET("/get", controllers.CounterController.GetLastCounter)
 		counter.POST("/add", controllers.CounterController.AddCounter)
+		counter.POST("/reset", controllers.CounterController.ResetCounter)
 	}
 
 	// Health endpoint

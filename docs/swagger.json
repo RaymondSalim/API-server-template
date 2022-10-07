@@ -63,6 +63,29 @@
                 }
             }
         },
+        "/counter/reset": {
+            "post": {
+                "description": "Reset Counter",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "tags": [
+                    "Counter"
+                ],
+                "summary": "Reset counter",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.FooResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/foo/create": {
             "post": {
                 "description": "Adds a new foo to the database",
