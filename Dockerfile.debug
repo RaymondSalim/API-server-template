@@ -26,4 +26,4 @@ COPY ./config/server.toml ./config/
 
 EXPOSE 8080 40000
 
-CMD ["/dlv", "--listen=:40000", "--headless=true", "--api-version=2", "--accept-multiclient", "exec", "/web-server"]
+ENTRYPOINT ["/dlv", "--listen=:40000", "--headless=true", "--api-version=2", "--accept-multiclient", "exec", "/web-server"]
