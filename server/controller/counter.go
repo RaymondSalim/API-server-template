@@ -48,7 +48,25 @@ func (cc CounterController) GetLastCounter(c *gin.Context) {
 // @Success     200 {object} response.FooResponse
 // @Router      /counter/add [post]
 func (cc CounterController) AddCounter(c *gin.Context) {
-	_ = cc.countService.PublishAddCounter(c)
+	err := cc.countService.PublishAddCounter(c)
+	if err != nil {
+		log.Errorf("failed to publish add counter with error: %v", err)
+	}
+	c.String(http.StatusOK, "ok")
+}
 
+// ResetCounter godoc
+// @Tags        Counter
+// @Summary     Reset counter
+// @Description Reset Counter
+// @Accept      json
+// @Produce     html
+// @Success     200 {object} response.FooResponse
+// @Router      /counter/reset [post]
+func (cc CounterController) ResetCounter(c *gin.Context) {
+	err := cc.countService.PublishResetCounter(c)
+	if err != nil {
+		log.Errorf("failed to publish reset counter with error: %v", err)
+	}
 	c.String(http.StatusOK, "ok")
 }

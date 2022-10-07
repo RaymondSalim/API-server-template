@@ -72,6 +72,21 @@ paths:
       summary: Get Last counter
       tags:
       - Counter
+  /counter/reset:
+    post:
+      consumes:
+      - application/json
+      description: Reset Counter
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.FooResponse'
+      summary: Reset counter
+      tags:
+      - Counter
   /foo/create:
     post:
       consumes:
