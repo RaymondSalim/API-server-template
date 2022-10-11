@@ -1,9 +1,12 @@
 .DEFAULT_GOAL := build
 
 # Gets service_name and version from server.toml
-SERVICE_NAME := $(shell sed -n 's/^ *SERVICE_NAME.*=.*"\([^"]*\)".*/\1/p' server.toml)
-VERSION := $(shell sed -n 's/^ *VERSION.*=.*"\([^"]*\)".*/\1/p' server.toml)
+SERVICE_NAME := $(shell (test -f "config/server.toml" && sed -n 's/^ *SERVICE_NAME.*=.*"\([^"]*\)".*/\1/p' config/server.toml) || sed -n 's/^ *SERVICE_NAME.*=.*"\([^"]*\)".*/\1/p' config/template.toml )
+VERSION := $(shell (test -f "config/server.toml" && sed -n 's/^ *VERSION.*=.*"\([^"]*\)".*/\1/p' config/server.toml) || sed -n 's/^ *VERSION.*=.*"\([^"]*\)".*/\1/p' config/template.toml )
 
+init:
+	@chmod +x ./setup.sh
+	@./setup.sh
 
 build:
 	@echo "Building for darwin/amd64"
