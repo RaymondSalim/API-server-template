@@ -1,0 +1,40 @@
+#!/bin/sh
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+root_dir=$(git rev-parse --show-toplevel)
+cd "$root_dir" || exit
+
+test_exit_code() {
+  if [ 0 -ne "$1" ]; then
+    echo -e "${RED}$2${NC}" >&2
+    exit "$1"
+  fi
+}
+
+test_build() {
+  local files
+  echo -e "${CYAN}Test building go files...${NC}"
+
+  files=$(go list ./...  | grep -v /vendor/)
+  go build $files
+
+  return $?
+}
+
+unit_test() {
+  echo -e "${CYAN}Running unit tests...${NC}"
+  go test  ./... | grep -v -iE "[?]{1}|(ok|testing|pass)"
+  return "${PIPESTATUS[0]}"
+}
+
+test_build
+test_exit_code $? "Go Build Failed"
+
+unit_test
+test_exit_code $? "Unit Test Failed"
+
+echo -e "${GREEN}Pre-push test success${NC}"
