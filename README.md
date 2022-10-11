@@ -51,10 +51,9 @@ This template is inspired by https://ldej.nl/post/enterprise-go-architecture/
 ```
 
 ## Steps
-1. Grant Executable permission to `setup.sh` -> `sudo chmod +x ./setup.sh`
-2. Run `./setup.sh`
-3. Copy `./config/template.toml` to `./config/server.toml` (Do not add server.toml to repository)
-4. Update `server.toml` values
+1. Run `make init`
+2. Copy `./config/template.toml` to `./config/server.toml` (Do not add server.toml to repository)
+3. Update `server.toml` values
 
 ## Commit Message
 We follow [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/)'s specification for commit messages
