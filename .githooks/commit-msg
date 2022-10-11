@@ -1,0 +1,21 @@
+#!/bin/sh
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+root_dir=$(git rev-parse --show-toplevel)
+cd "$root_dir" || exit
+
+# https://gist.github.com/marcojahn/482410b728c31b221b70ea6d2c433f0c
+regex='^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([a-zA-Z\-]+\))?(!)?(: )[[:alnum:][:blank:]`,.]+$'
+# (\([\w\-\.]+\))?(!)?: [\w\s]+
+
+#test "" != "$(egrep "$regex" "$1")" || {
+#    echo -e "${RED}Commit Message Invalid. Refer to README.md${NC}" >&2
+#    exit 1
+#}
+
+if ! grep -iqE "$regex" "$1"; then
+  echo -e "${RED}Commit Message Invalid. Refer to README.md${NC}" >&2
+  exit 1
+fi
