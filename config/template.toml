@@ -1,5 +1,5 @@
 [server]
-SERVICE_NAME = "service"
+SERVICE_NAME = "API-server-template"
 VERSION = "0.0.1"
 PORT = 8080
 
