@@ -3,10 +3,11 @@ module github.com/RaymondSalim/API-server-template
 go 1.18
 
 // Org Module
-require github.com/Novometrix/util v0.0.0-20221004132223-2af805be61c3
+require github.com/Novometrix/util v0.0.0-20221206175529-9f33e6f03816
 
 require (
 	github.com/gin-gonic/gin v1.8.1
+	github.com/nsqio/go-nsq v1.1.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/viper v1.13.0
 	github.com/swaggo/files v0.0.0-20220728132757-551d4a08d97a
@@ -15,7 +16,6 @@ require (
 	gorm.io/driver/postgres v1.3.10
 	gorm.io/driver/sqlite v1.3.6
 	gorm.io/gorm v1.23.10
-	github.com/nsqio/go-nsq v1.1.0
 )
 
 require (
