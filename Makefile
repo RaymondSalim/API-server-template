@@ -17,6 +17,7 @@ build:
 
 build-docker:
 	docker build -t "$(SERVICE_NAME):$(VERSION)" -f ./Dockerfile .
+
 build-docker-debug:
 	docker build -t "$(SERVICE_NAME):$(VERSION)-debug" -f ./Dockerfile.debug .
 
@@ -26,8 +27,11 @@ format:
 run:
 	@go run main.go
 
+run-docker:
+	@docker run -d -p 8080:8080 -it "$(SERVICE_NAME):$(VERSION)"
+
 run-docker-debug:
-	@docker run -p 8080:8080 -p 40000:40000 --security-opt="apparmor=unconfined" --cap-add=SYS_PTRACE -it "$(SERVICE_NAME):$(VERSION)-debug"
+	@docker run -d -p 8080:8080 -p 40000:40000 --security-opt="apparmor=unconfined" --cap-add=SYS_PTRACE -it "$(SERVICE_NAME):$(VERSION)-debug"
 
 clean:
 	@go clean
