@@ -44,6 +44,8 @@ github.com/Masterminds/semver/v3 v3.1.1 h1:hLg3sBzpNErnxhQtUy/mmLR2I9foDujNK030I
 github.com/Masterminds/semver/v3 v3.1.1/go.mod h1:VPu/7SZ7ePZ3QOrcuXROw5FAcLl4a0cBrbBpGY/8hQs=
 github.com/Novometrix/util v0.0.0-20221004132223-2af805be61c3 h1:ARwFiSAz7v+jNw5jOk4q75YqVB6PzyF6FsBpRjwveMo=
 github.com/Novometrix/util v0.0.0-20221004132223-2af805be61c3/go.mod h1:MfeCZnlv2JRt1r92UEHqI6fqiUqZGzGLZNKazoRn69U=
+github.com/Novometrix/util v0.0.0-20221206175529-9f33e6f03816 h1:7yVx/tYqNHJIU9RJePjR0vHKxL6JyIN0Il4iZHTvhQs=
+github.com/Novometrix/util v0.0.0-20221206175529-9f33e6f03816/go.mod h1:MfeCZnlv2JRt1r92UEHqI6fqiUqZGzGLZNKazoRn69U=
 github.com/PuerkitoBio/purell v1.1.1 h1:WEQqlqaGbrPkxLJWfBwQmfEAE1Z7ONdDLqrN38tNFfI=
 github.com/PuerkitoBio/purell v1.1.1/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
 github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 h1:d+Bc7a5rLufV/sSk/8dngufqelfh6jnri85riMAaF/M=
