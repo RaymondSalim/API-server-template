@@ -3,7 +3,7 @@ module github.com/RaymondSalim/API-server-template
 go 1.18
 
 // Org Module
-require github.com/Novometrix/util v0.0.0-20221206175529-9f33e6f03816
+require github.com/Novometrix/util v0.0.0-20230320141023-f9a33ceec187
 
 require (
 	github.com/gin-gonic/gin v1.8.1
