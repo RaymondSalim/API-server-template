@@ -5,7 +5,7 @@ FROM golang:1.18.6 as build-stage
 RUN go install github.com/go-delve/delve/cmd/dlv@latest
 
 WORKDIR $GOPATH/src/packages/web-server
-COPY . .
+COPY ../.. .
 
 # Install dependencies
 RUN go mod download
@@ -22,8 +22,8 @@ WORKDIR /app
 # Copy executable
 COPY --from=build-stage /go/bin/dlv ./
 COPY --from=build-stage /build-output/web-server ./
-COPY ./config/compose.toml ./config/server.toml
+COPY ../../config/compose.toml ./config/server.toml
 
 EXPOSE 8080 40000
 
-CMD ["/app/dlv", "--listen=:40000", "--headless=true", "--api-version=2", "--accept-multiclient", "exec", "/app/web-server"]
+ENTRYPOINT ["/app/dlv", "--listen=:40000", "--headless=true", "--api-version=2", "--accept-multiclient", "exec", "/app/web-server"]

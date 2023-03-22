@@ -9,7 +9,7 @@ RUN go install github.com/go-delve/delve/cmd/dlv@latest
 RUN go install github.com/cosmtrek/air@5cd62ac
 
 WORKDIR /app
-COPY . /app
+COPY ../.. /app
 #COPY go.mod go.sum ./
 
 # Install dependencies
