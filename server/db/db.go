@@ -8,6 +8,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 	"strings"
 )
 
@@ -16,13 +17,14 @@ import (
 */
 
 func Init(cfg *config.AppConfig) (db *gorm.DB, err error) {
-	gormConfig := &gorm.Config{
-		SkipDefaultTransaction: true,
-	}
+	gormConfig := generateGormConfig(cfg)
+	log.Debugf("gormConfig: %+v", gormConfig)
 
 	log.Debugf("connecting to db of type: %s", cfg.Database.Type)
 	if strings.ToLower(cfg.Database.Type) == "postgresql" {
 		dsn := constructDataSourceName(cfg)
+
+		log.Debugf("data source name: %v", dsn)
 		db, err = gorm.Open(postgres.Open(dsn), gormConfig)
 	} else if strings.ToLower(cfg.Database.Type) == "sqlite" {
 		db, err = gorm.Open(sqlite.Open("file::memory:?cache=shared"), gormConfig)
@@ -32,6 +34,26 @@ func Init(cfg *config.AppConfig) (db *gorm.DB, err error) {
 	}
 
 	return
+}
+
+func generateGormConfig(cfg *config.AppConfig) *gorm.Config {
+	if strings.ToLower(cfg.Database.Type) == "postgresql" {
+		tablePrefix := ""
+		if cfg.Database.Schema != "" {
+			tablePrefix = fmt.Sprintf("%v.", cfg.Database.Schema)
+		}
+
+		return &gorm.Config{
+			SkipDefaultTransaction: true,
+			NamingStrategy: schema.NamingStrategy{
+				TablePrefix: tablePrefix,
+			},
+		}
+	}
+
+	return &gorm.Config{
+		SkipDefaultTransaction: true,
+	}
 }
 
 func constructDataSourceName(cfg *config.AppConfig) string {
