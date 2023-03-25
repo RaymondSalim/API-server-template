@@ -8,6 +8,8 @@ type BaseResponse struct {
 }
 
 type APIFormError struct {
-	Field string `json:"field"`
-	Error string `json:"error"`
+	Field        string `json:"field"`
+	ErrorMessage string `json:"error_message"`
 }
+
+func (e APIFormError) Error() string { return e.ErrorMessage }
