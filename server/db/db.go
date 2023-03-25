@@ -3,11 +3,13 @@ package db
 import (
 	"fmt"
 	"github.com/RaymondSalim/API-server-template/config"
+	"github.com/RaymondSalim/API-server-template/server/constants"
 	"github.com/RaymondSalim/API-server-template/server/models"
 	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 	"strings"
 )
@@ -37,6 +39,12 @@ func Init(cfg *config.AppConfig) (db *gorm.DB, err error) {
 }
 
 func generateGormConfig(cfg *config.AppConfig) *gorm.Config {
+	logLevel := logger.Error
+
+	if cfg.Environment != constants.EnvironmentProduction {
+		logLevel = logger.Info
+	}
+
 	if strings.ToLower(cfg.Database.Type) == "postgresql" {
 		tablePrefix := ""
 		if cfg.Database.Schema != "" {
@@ -48,11 +56,13 @@ func generateGormConfig(cfg *config.AppConfig) *gorm.Config {
 			NamingStrategy: schema.NamingStrategy{
 				TablePrefix: tablePrefix,
 			},
+			Logger: logger.Default.LogMode(logLevel),
 		}
 	}
 
 	return &gorm.Config{
 		SkipDefaultTransaction: true,
+		Logger:                 logger.Default.LogMode(logLevel),
 	}
 }
 
