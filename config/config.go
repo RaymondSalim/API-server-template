@@ -8,31 +8,36 @@ import (
 	"strings"
 )
 
+type Server struct {
+	ServiceName string
+	Port        string
+	Version     string
+}
+
+type Database struct {
+	Type     string
+	Host     string
+	Port     string
+	Database string
+	Schema   string
+	SSLMode  string
+	Username *string
+	Password *string
+	Timezone string
+}
+
+type NSQ struct {
+	NSQDUrl       string `mapstructure:"DAEMON_URL"`
+	NSQLookupdURL string `mapstructure:"LOOKUP_DAEMON_URL"`
+}
+
 type AppConfig struct {
 	ConfigFileName string
 	Environment    string
-	Server         struct {
-		ServiceName string
-		Port        string
-		Version     string
-	}
 
-	Database struct {
-		Type     string
-		Host     string
-		Port     string
-		Database string
-		Schema   string
-		SSLMode  string
-		Username *string
-		Password *string
-		Timezone string
-	}
-
-	NSQ struct {
-		NSQDUrl       string `mapstructure:"DAEMON_URL"`
-		NSQLookupdURL string `mapstructure:"LOOKUP_DAEMON_URL"`
-	}
+	Server
+	Database
+	NSQ
 }
 
 type LaunchOptions struct {
