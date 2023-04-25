@@ -48,6 +48,8 @@ github.com/Novometrix/util v0.0.0-20221206175529-9f33e6f03816 h1:7yVx/tYqNHJIU9R
 github.com/Novometrix/util v0.0.0-20221206175529-9f33e6f03816/go.mod h1:MfeCZnlv2JRt1r92UEHqI6fqiUqZGzGLZNKazoRn69U=
 github.com/Novometrix/util v0.0.0-20230320141023-f9a33ceec187 h1:mVB1Wsy7Dxpo/h+oM06HEZfzK/v5d43Y1dRQ+KOrrZY=
 github.com/Novometrix/util v0.0.0-20230320141023-f9a33ceec187/go.mod h1:MfeCZnlv2JRt1r92UEHqI6fqiUqZGzGLZNKazoRn69U=
+github.com/Novometrix/util v0.1.1 h1:WN8qyhJtd3Z4ebLZ4jnse03AbpS3u88T/7e3qJgaKe8=
+github.com/Novometrix/util v0.1.1/go.mod h1:MfeCZnlv2JRt1r92UEHqI6fqiUqZGzGLZNKazoRn69U=
 github.com/PuerkitoBio/purell v1.1.1 h1:WEQqlqaGbrPkxLJWfBwQmfEAE1Z7ONdDLqrN38tNFfI=
 github.com/PuerkitoBio/purell v1.1.1/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
 github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 h1:d+Bc7a5rLufV/sSk/8dngufqelfh6jnri85riMAaF/M=

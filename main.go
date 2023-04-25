@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"errors"
-	util "github.com/Novometrix/util/middleware"
 	"github.com/RaymondSalim/API-server-template/config"
 	"github.com/RaymondSalim/API-server-template/server/constants"
 	"github.com/RaymondSalim/API-server-template/server/consumers"
@@ -66,8 +65,6 @@ func main() {
 	csm := consumers.InitConsumers(&cfg, services)
 
 	ginRouter := gin.New()
-
-	ginRouter.Use(util.ResponseWrapperMiddleware)
 
 	log.Debug("registering routes")
 	router.Init(ginRouter, controllers, &cfg)

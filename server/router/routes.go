@@ -4,6 +4,7 @@ import (
 	"github.com/RaymondSalim/API-server-template/config"
 	"github.com/RaymondSalim/API-server-template/server/constants"
 	"github.com/RaymondSalim/API-server-template/server/controller"
+	"github.com/Novometrix/util/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,20 +26,24 @@ import (
 func Init(engine *gin.Engine, controllers *controller.Controllers, cfg *config.AppConfig) {
 	engine.RedirectTrailingSlash = false
 
-	// Foo Endpoints
-	foo := engine.Group("/foo")
+	wrapped := engine.Group("")
+	wrapped.Use(middleware.ResponseWrapperMiddleware())
 	{
-		foo.POST("/create", controllers.FooController.AddFoo)
-		foo.POST("/get", controllers.FooController.GetFoo)
-		foo.POST("/delete", controllers.FooController.AddFoo)
-	}
+		// Foo Endpoints
+		foo := wrapped.Group("/foo")
+		{
+			foo.POST("/create", controllers.FooController.AddFoo)
+			foo.POST("/get", controllers.FooController.GetFoo)
+			foo.POST("/delete", controllers.FooController.AddFoo)
+		}
 
-	// Counter Endpoints
-	counter := engine.Group("/counter")
-	{
-		counter.GET("/get", controllers.CounterController.GetLastCounter)
-		counter.POST("/add", controllers.CounterController.AddCounter)
-		counter.POST("/reset", controllers.CounterController.ResetCounter)
+		// Counter Endpoints
+		counter := wrapped.Group("/counter")
+		{
+			counter.GET("/get", controllers.CounterController.GetLastCounter)
+			counter.POST("/add", controllers.CounterController.AddCounter)
+			counter.POST("/reset", controllers.CounterController.ResetCounter)
+		}
 	}
 
 	// Health endpoint
