@@ -24,8 +24,8 @@ type FooController struct {
 	fooService service.FooService
 }
 
-func NewFooController(fooService service.FooService) FooController {
-	return FooController{fooService: fooService}
+func NewFooController(fooService service.FooService) *FooController {
+	return &FooController{fooService: fooService}
 }
 
 // @BasePath /foo

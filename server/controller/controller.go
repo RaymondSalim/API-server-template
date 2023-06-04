@@ -3,10 +3,10 @@ package controller
 import "github.com/RaymondSalim/API-server-template/server/service"
 
 type Controllers struct {
-	FooController
-	CounterController
+	*FooController
+	*CounterController
 
-	HealthController
+	*HealthController
 }
 
 func InitController(s *service.Services) *Controllers {
@@ -15,6 +15,6 @@ func InitController(s *service.Services) *Controllers {
 	return &Controllers{
 		FooController:     NewFooController(s.FooService),
 		CounterController: NewCounterController(s.CounterService),
-		HealthController:  *healthController,
+		HealthController:  healthController,
 	}
 }
