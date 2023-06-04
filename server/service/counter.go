@@ -23,7 +23,7 @@ type counterService struct {
 }
 
 func NewCounterService(counterRepo repository.CounterRepository, nsqProducer *nsq.Producer) CounterService {
-	return counterService{
+	return &counterService{
 		counterRepository: counterRepo,
 		producer:          nsqProducer,
 	}

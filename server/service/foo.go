@@ -22,7 +22,7 @@ type fooService struct {
 }
 
 func NewFooService(fooRepo repository.FooRepository, nsqProducer *nsq.Producer) FooService {
-	return fooService{
+	return &fooService{
 		fooRepository: fooRepo,
 		producer:      nsqProducer,
 	}
