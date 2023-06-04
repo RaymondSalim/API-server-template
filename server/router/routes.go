@@ -1,10 +1,10 @@
 package router
 
 import (
+	"github.com/Novometrix/util/middleware"
 	"github.com/RaymondSalim/API-server-template/config"
 	"github.com/RaymondSalim/API-server-template/server/constants"
 	"github.com/RaymondSalim/API-server-template/server/controller"
-	"github.com/Novometrix/util/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -47,7 +47,7 @@ func Init(engine *gin.Engine, controllers *controller.Controllers, cfg *config.A
 	}
 
 	// Health endpoint
-	engine.GET("/health", controllers.HealthController.Status)
+	engine.GET("/healthz", controllers.HealthController.Status)
 
 	if cfg.Environment != constants.EnvironmentProduction {
 		InitSwaggerRoutes(engine)

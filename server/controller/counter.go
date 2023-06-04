@@ -14,8 +14,8 @@ type CounterController struct {
 	countService service.CounterService
 }
 
-func NewCounterController(countService service.CounterService) CounterController {
-	return CounterController{countService: countService}
+func NewCounterController(countService service.CounterService) *CounterController {
+	return &CounterController{countService: countService}
 }
 
 // @BasePath /counter
