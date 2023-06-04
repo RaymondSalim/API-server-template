@@ -5,25 +5,28 @@ import (
 	"fmt"
 	"github.com/RaymondSalim/API-server-template/server/constants"
 	"github.com/spf13/viper"
+	"reflect"
 	"strings"
 )
 
+// mapstructure field tag is not required, as viper can automatically choose a suitable name, but BindEnvs() only works on fields that has mapstructure declared
+
 type Server struct {
-	ServiceName string
-	Port        string
-	Version     string
+	ServiceName string `mapstructure:"SERVICE_NAME"`
+	Port        string `mapstructure:"PORT"`
+	Version     string `mapstructure:"VERSION"`
 }
 
 type Database struct {
-	Type     string
-	Host     string
-	Port     string
-	Database string
-	Schema   string
-	SSLMode  string
-	Username *string
-	Password *string
-	Timezone string
+	Type     string  `mapstructure:"TYPE"`
+	Host     string  `mapstructure:"HOST"`
+	Port     string  `mapstructure:"PORT"`
+	Database string  `mapstructure:"DATABASE"`
+	Schema   string  `mapstructure:"SCHEMA"`
+	SSLMode  string  `mapstructure:"SSLMODE"`
+	Username *string `mapstructure:"USERNAME"`
+	Password *string `mapstructure:"PASSWORD"`
+	Timezone string  `mapstructure:"TIMEZONE"`
 }
 
 type NSQ struct {
@@ -35,9 +38,9 @@ type AppConfig struct {
 	ConfigFileName string
 	Environment    string
 
-	Server
-	Database
-	NSQ
+	Server   `mapstructure:"SERVER"`
+	Database `mapstructure:"DATABASE"`
+	NSQ      `mapstructure:"NSQ"`
 }
 
 type LaunchOptions struct {
@@ -53,6 +56,9 @@ func GetAppConfig() AppConfig {
 	v.SetConfigType(constants.ConfigType)
 	v.SetConfigName(launchOpt.Config)
 	v.AddConfigPath("./config")
+
+	v.AutomaticEnv()
+	BindEnvs(v, c)
 
 	v.SetDefault("GOENV", constants.EnvironmentDevelopment)
 	c.Environment = strings.ToLower(v.GetString("GOENV"))
@@ -85,5 +91,24 @@ func GetLaunchOptions() *LaunchOptions {
 
 	return &LaunchOptions{
 		Config: configName,
+	}
+}
+
+func BindEnvs(viperInstance *viper.Viper, iface interface{}, parts ...string) {
+	ifv := reflect.ValueOf(iface)
+	ift := reflect.TypeOf(iface)
+	for i := 0; i < ift.NumField(); i++ {
+		v := ifv.Field(i)
+		t := ift.Field(i)
+		tv, ok := t.Tag.Lookup("mapstructure")
+		if !ok {
+			continue
+		}
+		switch v.Kind() {
+		case reflect.Struct:
+			BindEnvs(viperInstance, v.Interface(), append(parts, tv)...)
+		default:
+			viperInstance.BindEnv(strings.Join(append(parts, tv), "."))
+		}
 	}
 }
