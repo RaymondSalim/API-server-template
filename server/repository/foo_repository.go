@@ -26,7 +26,7 @@ type fooRepository struct {
 }
 
 func NewFooRepository(db *gorm.DB) FooRepository {
-	return fooRepository{db: db}
+	return &fooRepository{db: db}
 }
 
 func (fr fooRepository) GetFoo(c *gin.Context, id int) (models.Foo, error) {

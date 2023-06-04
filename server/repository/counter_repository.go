@@ -16,7 +16,7 @@ type counterRepository struct {
 }
 
 func NewCounterRepository(db *gorm.DB) CounterRepository {
-	return counterRepository{db: db}
+	return &counterRepository{db: db}
 }
 
 // AddCounter Obviously bad implementation here
