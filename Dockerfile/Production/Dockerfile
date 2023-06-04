@@ -16,6 +16,10 @@ ENV GOENV="production"
 
 WORKDIR /app
 
+RUN apt-get update
+RUN apt-get install ca-certificates -y
+RUN update-ca-certificates
+
 # Copy executable
 COPY --from=build-stage /build-output/web-server ./
 COPY ../../config/compose.toml ./config/server.toml
